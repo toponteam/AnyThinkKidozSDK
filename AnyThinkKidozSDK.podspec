@@ -8,7 +8,7 @@
 
   Pod::Spec.new do |s|
   s.name             = 'AnyThinkKidozSDK'
-  s.version          = '1.3.6'
+  s.version          = '8.9.0'
   s.summary          = 'AnyThinkKidozSDK'
   s.description      = <<-DESC
       AnyThinkKidozSDK,AnyThinkKidozSDK,Kidoz
