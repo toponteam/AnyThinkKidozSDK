@@ -53,36 +53,40 @@
 -(void)bannerIsReady;
 -(void)bannerReturnedWithNoOffers;
 -(void)bannerLoadFailed;
+-(void)bannerShowFailed;
 -(void)bannerDidReciveError:(NSString*)errorMessage;
 -(void)bannerLeftApplication;
 @end
 
 
 typedef enum {
-  BOTTOM_CENTER,TOP_LEFT,TOP_CENTER,TOP_RIGHT,BOTTOM_LEFT,BOTTOM_RIGHT,NONE
+    BOTTOM_CENTER,TOP_LEFT,TOP_CENTER,TOP_RIGHT,BOTTOM_LEFT,BOTTOM_RIGHT,POSITION_NONE
 }BANNER_POSITION;
 
 @interface KidozSDK : NSObject
 
-+ (id)instance;
++ (instancetype)instance;
 
 - (void)initializeWithPublisherID:(NSString *)publisherID securityToken:(NSString *)securityToken withDelegate:(id<KDZInitDelegate>)delegate;
 - (void)initializeWithPublisherID:(NSString *)publisherID securityToken:(NSString *)securityToken;
 
 - (void)initializeInterstitialWithDelegate:(id<KDZInterstitialDelegate>)delegate;
+- (void)initializeInterstitialWithDelegate:(id<KDZInterstitialDelegate>)delegate withViewController:(UIViewController *)viewController;
+
 
 - (void)loadInterstitial;
 - (void)showInterstitial;
-
+- (void)showInterstitial:(UIViewController *)viewController;
 
 - (void)initializeRewardedWithDelegate:(id<KDZRewardedDelegate>)delegate;
+- (void)initializeRewardedWithDelegate:(id<KDZRewardedDelegate>)delegate withViewController:(UIViewController *)viewController;
 
 - (void)loadRewarded;
 - (void)showRewarded;
+- (void)showRewarded:(UIViewController *)viewController;
 
 - (BOOL)isInterstitialInitialized;
 - (BOOL)isInterstitialReady;
-
 
 - (BOOL)isRewardedInitialized;
 - (BOOL)isRewardedReady;
@@ -91,14 +95,18 @@ typedef enum {
 
 - (void)initializeBannerWithDelegate:(id<KDZBannerDelegate>)delegate withViewController:(UIViewController *)viewController;
 - (void)initializeBannerWithDelegate:(id<KDZBannerDelegate>)delegate withView:(UIView*)view;
+- (void)initializeBannerWithDelegate:(id<KDZBannerDelegate>)delegate withView:(UIView*)view withViewController:(UIViewController *)viewController;
 
 - (void)loadBanner;
 - (void)showBanner;
+- (void)showBanner:(UIViewController *)viewController;
+
 - (void)hideBanner;
 - (void)setBannerPosition:(BANNER_POSITION)bannerPosition;
 
 - (BOOL)isBannerInitialized;
 - (BOOL)isBannerReady;
+- (BOOL)isBannerShowing;
 - (void)setInterstitialDelegate:(id<KDZInterstitialDelegate>)delegate;
 - (void)setRewardedDelegate:(id<KDZRewardedDelegate>)delegate;
 - (void)setBannerDelegate:(id<KDZBannerDelegate>)delegate;
